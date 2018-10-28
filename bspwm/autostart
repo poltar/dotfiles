@@ -1,0 +1,26 @@
+#!/bin/bash
+
+nm-applet &
+dex /home/elf/.config/autostart/lxrandr-autostart.desktop &&
+nitrogen --restore &&
+compton -b &&
+
+sleep 1 &&
+
+if [ "`bash /home/elf/Documents/scripts/shell/ismonitorconnected.sh`" == "true" ];then
+        polybar top1 &
+        polybar top2 &        
+else
+        polybar top1 &
+fi
+
+light-locker &
+xfce4-power-manager &
+if ! pgrep -x "sxhkd" > /dev/null;then
+        sxhkd &
+fi
+urxvtd --quiet --opendisplay --fork &
+mpd &
+bum --no_display &
+#python3 /home/elf/Documents/scripts/python/updatewallncolor.py &
+sh ~/.fehbg &
